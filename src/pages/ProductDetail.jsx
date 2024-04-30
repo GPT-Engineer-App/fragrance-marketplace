@@ -1,12 +1,18 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Button, useToast } from "@chakra-ui/react";
+import { Box, Image, Text, Button, useToast } from "@chakra-ui/react";
 
 function ProductDetail() {
   const { productId } = useParams();
-
-  const toast = useToast();
   const navigate = useNavigate();
+  const toast = useToast();
+
+  const product = {
+    id: productId,
+    name: "Product Name",
+    image: "https://example.com/product-image.jpg",
+    description: "Product Description",
+  };
 
   const sendRequest = () => {
     toast({
@@ -20,14 +26,16 @@ function ProductDetail() {
   };
 
   return (
-    <div>
-      <h1>Product Detail</h1>
-      <p>Product ID: {productId}</p>
+    <Box p={5}>
+      <Image src={product.image} alt={product.name} />
+      <Text fontSize="2xl" fontWeight="bold">
+        {product.name}
+      </Text>
+      <Text>{product.description}</Text>
       <Button colorScheme="blue" onClick={sendRequest}>
         Send Request
       </Button>
-      {}
-    </div>
+    </Box>
   );
 }
 

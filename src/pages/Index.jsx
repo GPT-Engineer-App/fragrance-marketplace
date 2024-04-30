@@ -43,7 +43,7 @@ const Index = () => {
             .filter((p) => p.type === "Men")
             .map((product) => (
               <option key={product.id} value={product.id}>
-                {`${product.name} - ${product.type}, ${product.price}`}
+                <a href={`/product/${product.id}`}>{`${product.name} - ${product.type}, ${product.price}`}</a>
               </option>
             ))}
         </Select>
@@ -52,7 +52,7 @@ const Index = () => {
             .filter((p) => p.type === "Women")
             .map((product) => (
               <option key={product.id} value={product.id}>
-                {`${product.name} - ${product.type}, ${product.price}`}
+                <a href={`/product/${product.id}`}>{`${product.name} - ${product.type}, ${product.price}`}</a>
               </option>
             ))}
         </Select>

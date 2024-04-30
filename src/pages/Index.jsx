@@ -1,4 +1,5 @@
-import { Box, Text, Image, Button, VStack, HStack, useToast, Select } from "@chakra-ui/react";
+import { Box, Text, Image, Button, VStack, HStack, useToast, Select, useNavigate } from "@chakra-ui/react";
+
 import { FaEnvelope } from "react-icons/fa";
 
 const products = [
@@ -52,21 +53,22 @@ const Index = () => {
         <Text fontSize="2xl" fontWeight="bold">
           Colognes & Perfumes
         </Text>
-        <Select placeholder="Select Men's Product" onChange={(e) => sendRequest(products.find((p) => p.id === parseInt(e.target.value)))}>
+        const navigate = useNavigate();
+        <Select placeholder="Select Men's Product" onChange={(e) => navigate(`/product/${e.target.value}`)}>
           {products
             .filter((p) => p.type === "Men")
             .map((product) => (
               <option key={product.id} value={product.id}>
-                <a href={`/product/${product.id}`}>{`${product.name} - ${product.type}, ${product.price}`}</a>
+                {`${product.name} - ${product.type}, ${product.price}`}
               </option>
             ))}
         </Select>
-        <Select placeholder="Select Women's Product" onChange={(e) => sendRequest(products.find((p) => p.id === parseInt(e.target.value)))}>
+        <Select placeholder="Select Women's Product" onChange={(e) => navigate(`/product/${e.target.value}`)}>
           {products
             .filter((p) => p.type === "Women")
             .map((product) => (
               <option key={product.id} value={product.id}>
-                <a href={`/product/${product.id}`}>{`${product.name} - ${product.type}, ${product.price}`}</a>
+                {`${product.name} - ${product.type}, ${product.price}`}
               </option>
             ))}
         </Select>

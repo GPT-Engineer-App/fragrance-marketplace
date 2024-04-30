@@ -16,6 +16,20 @@ const products = [
     price: "$65",
     image: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHx3b21lbiUyMHBlcmZ1bWV8ZW58MHx8fHwxNzE0NDc3MzY2fDA&ixlib=rb-4.0.3&q=80&w=1080",
   },
+  ...Array.from({ length: 20 }, (_, i) => ({
+    id: i + 3,
+    name: `Men's Cologne ${i + 1}`,
+    type: "Men",
+    price: `$${50 + i}`,
+    image: `https://example.com/mens-cologne-${i + 1}.jpg`,
+  })),
+  ...Array.from({ length: 20 }, (_, i) => ({
+    id: i + 23,
+    name: `Women's Perfume ${i + 1}`,
+    type: "Women",
+    price: `$${65 + i}`,
+    image: `https://example.com/womens-perfume-${i + 1}.jpg`,
+  })),
 ];
 
 const Index = () => {

@@ -1,5 +1,5 @@
-import { Box, Flex, Text, Image, Button, VStack, HStack, useToast } from "@chakra-ui/react";
-import { FaShoppingCart, FaEnvelope } from "react-icons/fa";
+import { Box, Text, Image, Button, VStack, HStack, useToast, Select } from "@chakra-ui/react";
+import { FaEnvelope } from "react-icons/fa";
 
 const products = [
   {
@@ -38,26 +38,24 @@ const Index = () => {
         <Text fontSize="2xl" fontWeight="bold">
           Colognes & Perfumes
         </Text>
-        <HStack spacing={5}>
-          {products.map((product) => (
-            <Box key={product.id} p={5} shadow="md" borderWidth="1px" borderRadius="lg">
-              <Image src={product.image} alt={product.name} boxSize="200px" objectFit="cover" />
-              <Text mt={2} fontSize="xl" fontWeight="semibold">
+        <Select placeholder="Select Men's Product" onChange={(e) => sendRequest(products.find((p) => p.id === parseInt(e.target.value)))}>
+          {products
+            .filter((p) => p.type === "Men")
+            .map((product) => (
+              <option key={product.id} value={product.id}>
                 {product.name}
-              </Text>
-              <Text>{product.type}</Text>
-              <Text fontSize="lg" color="green.500">
-                {product.price}
-              </Text>
-              <Button leftIcon={<FaShoppingCart />} colorScheme="blue" mt={3} onClick={() => sendRequest(product)}>
-                Buy Now
-              </Button>
-              <Button leftIcon={<FaEnvelope />} colorScheme="teal" mt={3} onClick={() => sendRequest(product)}>
-                Send Request
-              </Button>
-            </Box>
-          ))}
-        </HStack>
+              </option>
+            ))}
+        </Select>
+        <Select placeholder="Select Women's Product" onChange={(e) => sendRequest(products.find((p) => p.id === parseInt(e.target.value)))}>
+          {products
+            .filter((p) => p.type === "Women")
+            .map((product) => (
+              <option key={product.id} value={product.id}>
+                {product.name}
+              </option>
+            ))}
+        </Select>
       </VStack>
     </Box>
   );

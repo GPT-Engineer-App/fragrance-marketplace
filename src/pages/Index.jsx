@@ -1,6 +1,5 @@
-import { Box, Text, Image, Button, VStack, HStack, useToast, Select, useNavigate } from "@chakra-ui/react";
-
-import { FaEnvelope } from "react-icons/fa";
+import { Box, Flex, Text, Image, Button, VStack, HStack, useToast } from "@chakra-ui/react";
+import { FaShoppingCart, FaEnvelope } from "react-icons/fa";
 
 const products = [
   {
@@ -17,20 +16,6 @@ const products = [
     price: "$65",
     image: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHx3b21lbiUyMHBlcmZ1bWV8ZW58MHx8fHwxNzE0NDc3MzY2fDA&ixlib=rb-4.0.3&q=80&w=1080",
   },
-  ...Array.from({ length: 20 }, (_, i) => ({
-    id: i + 3,
-    name: `Men's Cologne ${i + 1}`,
-    type: "Men",
-    price: `$${50 + i}`,
-    image: `https://example.com/mens-cologne-${i + 1}.jpg`,
-  })),
-  ...Array.from({ length: 20 }, (_, i) => ({
-    id: i + 23,
-    name: `Women's Perfume ${i + 1}`,
-    type: "Women",
-    price: `$${65 + i}`,
-    image: `https://example.com/womens-perfume-${i + 1}.jpg`,
-  })),
 ];
 
 const Index = () => {
@@ -53,25 +38,26 @@ const Index = () => {
         <Text fontSize="2xl" fontWeight="bold">
           Colognes & Perfumes
         </Text>
-        const navigate = useNavigate();
-        <Select placeholder="Select Men's Product" onChange={(e) => navigate(`/product/${e.target.value}`)}>
-          {products
-            .filter((p) => p.type === "Men")
-            .map((product) => (
-              <option key={product.id} value={product.id}>
-                {`${product.name} - ${product.type}, ${product.price}`}
-              </option>
-            ))}
-        </Select>
-        <Select placeholder="Select Women's Product" onChange={(e) => navigate(`/product/${e.target.value}`)}>
-          {products
-            .filter((p) => p.type === "Women")
-            .map((product) => (
-              <option key={product.id} value={product.id}>
-                {`${product.name} - ${product.type}, ${product.price}`}
-              </option>
-            ))}
-        </Select>
+        <HStack spacing={5}>
+          {products.map((product) => (
+            <Box key={product.id} p={5} shadow="md" borderWidth="1px" borderRadius="lg">
+              <Image src={product.image} alt={product.name} boxSize="200px" objectFit="cover" />
+              <Text mt={2} fontSize="xl" fontWeight="semibold">
+                {product.name}
+              </Text>
+              <Text>{product.type}</Text>
+              <Text fontSize="lg" color="green.500">
+                {product.price}
+              </Text>
+              <Button leftIcon={<FaShoppingCart />} colorScheme="blue" mt={3} onClick={() => sendRequest(product)}>
+                Buy Now
+              </Button>
+              <Button leftIcon={<FaEnvelope />} colorScheme="teal" mt={3} onClick={() => sendRequest(product)}>
+                Send Request
+              </Button>
+            </Box>
+          ))}
+        </HStack>
       </VStack>
     </Box>
   );
